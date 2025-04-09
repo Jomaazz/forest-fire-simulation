@@ -41,7 +41,7 @@ mvn clean compile
 ### Running the Simulation
 
 ```bash
-mvn exec:java
+mvn exec:java "-Dexec.mainClass=com.forestfire.App"
 ```
 
 ## Configuration
