@@ -40,9 +40,24 @@ mvn clean compile
 
 ### Running the Simulation
 
+#### Option 1: Using Command Line (All Platforms)
+
 ```bash
+cd backend/forest-fire-simulation
 mvn exec:java "-Dexec.mainClass=com.forestfire.App"
 ```
+
+#### Option 2: Using Batch File (Windows)
+
+For Windows users who aren't familiar with command-line interfaces, a batch file is provided for easier execution:
+
+1. Place the `run-forest-fire-simulation.bat` file in the root directory of the project (same level as the "backend" folder)
+2. Double-click the batch file to run the simulation
+3. The batch file will:
+   - Navigate to the correct directory
+   - Build the project automatically
+   - Run the simulation
+   - Keep the window open until you press a key
 
 ## Configuration
 
