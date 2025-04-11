@@ -158,4 +158,64 @@ public class SimulationConfig {
     public String getConfigFilePath() {
         return configFilePath;
     }
+    
+    /**
+     * Sets the forest height.
+     * 
+     * @param forestHeight The new height of the forest grid
+     * @throws IllegalArgumentException If the height is not positive
+     */
+    public void setForestHeight(int forestHeight) throws IllegalArgumentException {
+        if (forestHeight <= 0) {
+            throw new IllegalArgumentException("Forest height must be positive");
+        }
+        this.forestHeight = forestHeight;
+    }
+    
+    /**
+     * Sets the forest width.
+     * 
+     * @param forestWidth The new width of the forest grid
+     * @throws IllegalArgumentException If the width is not positive
+     */
+    public void setForestWidth(int forestWidth) throws IllegalArgumentException {
+        if (forestWidth <= 0) {
+            throw new IllegalArgumentException("Forest width must be positive");
+        }
+        this.forestWidth = forestWidth;
+    }
+    
+    /**
+     * Sets the fire propagation probability.
+     * 
+     * @param firePropagationProbability The new probability of fire spreading to adjacent cells
+     * @throws IllegalArgumentException If the probability is not between 0 and 1
+     */
+    public void setFirePropagationProbability(double firePropagationProbability) throws IllegalArgumentException {
+        if (firePropagationProbability < 0 || firePropagationProbability > 1) {
+            throw new IllegalArgumentException("Fire propagation probability must be between 0 and 1");
+        }
+        this.firePropagationProbability = firePropagationProbability;
+    }
+    
+    /**
+     * Sets the initial fire positions.
+     * 
+     * @param positionsStr String containing the positions in format "row1,col1;row2,col2;..."
+     * @throws IllegalArgumentException If any position is invalid
+     */
+    public void setInitialFirePositions(String positionsStr) throws IllegalArgumentException {
+        int[][] positions = parseFirePositions(positionsStr);
+        
+        // Validate positions
+        for (int[] position : positions) {
+            if (position[0] < 0 || position[0] >= forestHeight || 
+                position[1] < 0 || position[1] >= forestWidth) {
+                throw new IllegalArgumentException(
+                    "Initial fire position (" + position[0] + "," + position[1] + ") is outside the forest");
+            }
+        }
+        
+        this.initialFirePositions = positions;
+    }
 }
