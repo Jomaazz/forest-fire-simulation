@@ -25,6 +25,12 @@ The simulation follows these rules:
 - Command-line interface for interaction
 - Graphical user interface for visual simulation
 
+## GUI Screenshot
+
+![Forest Fire Simulation GUI](./images/gui-screenshot.png)
+
+*The GUI shows a 10x10 forest grid with trees (green), fire (red), and configuration options for forest dimensions, fire probability, and initial positions. Control buttons allow starting, stepping through, and resetting the simulation.*
+
 ## Getting Started
 
 ### Prerequisites
