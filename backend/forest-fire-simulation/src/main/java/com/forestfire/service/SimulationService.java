@@ -49,6 +49,27 @@ public class SimulationService {
     }
     
     /**
+     * Updates the simulation configuration and reinitializes the simulation.
+     * 
+     * @param height The new forest height
+     * @param width The new forest width
+     * @param probability The new fire propagation probability
+     * @param positions The new initial fire positions string
+     * @throws IllegalArgumentException If any parameter is invalid
+     */
+    public void updateConfiguration(int height, int width, double probability, String positions) 
+            throws IllegalArgumentException {
+        // Update configuration
+        config.setForestHeight(height);
+        config.setForestWidth(width);
+        config.setFirePropagationProbability(probability);
+        config.setInitialFirePositions(positions);
+        
+        // Reinitialize the simulation with the new configuration
+        initialize();
+    }
+    
+    /**
      * Executes a single step of the simulation.
      * 
      * @return true if the simulation is still running, false if it has ended
