@@ -32,6 +32,23 @@ public class SimulationConfig {
     }
     
     /**
+     * Creates a new simulation configuration with default values.
+     * This constructor is provided for API compatibility.
+     */
+    public SimulationConfig() {
+        // Set default values
+        this.forestHeight = 10;
+        this.forestWidth = 10;
+        this.firePropagationProbability = 0.5;
+        
+        // Default initial fire position at [0,0]
+        this.initialFirePositions = new int[][]{{0, 0}};
+        
+        // No config file path for default configuration
+        this.configFilePath = null;
+    }
+    
+    /**
      * Loads configuration from the properties file.
      * 
      * @throws IOException If the configuration file cannot be read

@@ -7,71 +7,55 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Forest Fire Simulation</h1>
-        </header>
-        
-        <main>
-            <div class="simulation-container">
-                <div class="forest-grid-container">
-                    <canvas id="forestGrid"></canvas>
-                </div>
-                
-                <div class="controls-container">
-                    <div class="control-panel">
-                        <h2>Controls</h2>
-                        <div class="buttons">
-                            <button id="startBtn">Start</button>
-                            <button id="stepBtn">Step</button>
-                            <button id="resetBtn">Reset</button>
-                        </div>
-                        <div class="speed-control">
-                            <label for="speedSlider">Speed:</label>
-                            <input type="range" id="speedSlider" min="1" max="10" value="5">
-                            <div class="speed-labels">
-                                <span>1</span>
-                                <span>5</span>
-                                <span>10</span>
-                            </div>
-                        </div>
-                        <div class="status">
-                            <p id="statusText">Ready (Step 0)</p>
-                        </div>
-                    </div>
-                    
-                    <div class="config-panel">
-                        <h2>Configuration</h2>
-                        <div class="config-form">
-                            <div class="form-group">
-                                <label for="forestHeight">Forest Height:</label>
-                                <input type="number" id="forestHeight" min="5" max="100" value="10">
-                            </div>
-                            <div class="form-group">
-                                <label for="forestWidth">Forest Width:</label>
-                                <input type="number" id="forestWidth" min="5" max="100" value="10">
-                            </div>
-                            <div class="form-group">
-                                <label for="fireProbability">Fire Probability:</label>
-                                <input type="number" id="fireProbability" min="0" max="1" step="0.1" value="0.5">
-                            </div>
-                            <div class="form-group">
-                                <label for="initialPositions">Initial Fire Positions:</label>
-                                <input type="text" id="initialPositions" value="0,0;5,5">
-                                <small>Format: row1,col1;row2,col2;...</small>
-                            </div>
-                            <button id="applyBtn">Apply Changes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
-        
-        <footer>
-            <p>Forest Fire Simulation - JavaScript Frontend</p>
-        </footer>
-    </div>
+    <h1>Forest Fire Simulation</h1>
     
+    <div class="container">
+        <div class="forest-container">
+            <canvas id="forestCanvas" width="500" height="500"></canvas>
+        </div>
+        <div class="controls-container">
+            <div class="config-panel">
+                <h3>Configuration</h3>
+                <div class="form-group">
+                    <label for="forestHeight">Forest Height:</label>
+                    <input type="number" id="forestHeight" min="5" max="100" value="10">
+                </div>
+                <div class="form-group">
+                    <label for="forestWidth">Forest Width:</label>
+                    <input type="number" id="forestWidth" min="5" max="100" value="10">
+                </div>
+                <div class="form-group">
+                    <label for="fireProbability">Fire Probability:</label>
+                    <input type="number" id="fireProbability" min="0" max="1" step="0.1" value="0.5">
+                </div>
+                <div class="form-group">
+                    <label for="initialFirePositions">Initial Fire Positions:</label>
+                    <input type="text" id="initialFirePositions" value="0,0;5,5">
+                    <small>Format: row1,col1;row2,col2;...</small>
+                </div>
+                <button id="applyConfig" class="full-width">Apply Changes</button>
+            </div>
+            <div class="control-panel">
+                <h3>Controls</h3>
+                <div>
+                    <button id="startStop">Start</button>
+                    <button id="step">Step</button>
+                    <button id="reset" class="full-width">Reset</button>
+                </div>
+                <div class="form-group">
+                    <label for="speed">Speed:</label>
+                    <input type="range" id="speed" min="1" max="10" value="5">
+                    <div class="speed-labels">
+                        <span>1</span>
+                        <span>5</span>
+                        <span>10</span>
+                    </div>
+                </div>
+                <div class="status" id="status">Status: Ready (Step 0)</div>
+            </div>
+        </div>
+    </div>
+
     <script src="app.js"></script>
 </body>
 </html>

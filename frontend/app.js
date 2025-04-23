@@ -11,20 +11,20 @@ const CellState = {
 class ForestFireSimulation {
     constructor() {
         // DOM elements
-        this.canvas = document.getElementById('forestGrid');
+        this.canvas = document.getElementById('forestCanvas');
         this.ctx = this.canvas.getContext('2d');
-        this.startBtn = document.getElementById('startBtn');
-        this.stepBtn = document.getElementById('stepBtn');
-        this.resetBtn = document.getElementById('resetBtn');
-        this.speedSlider = document.getElementById('speedSlider');
-        this.statusText = document.getElementById('statusText');
-        this.applyBtn = document.getElementById('applyBtn');
+        this.startBtn = document.getElementById('startStop');
+        this.stepBtn = document.getElementById('step');
+        this.resetBtn = document.getElementById('reset');
+        this.speedSlider = document.getElementById('speed');
+        this.statusText = document.getElementById('status');
+        this.applyBtn = document.getElementById('applyConfig');
         
         // Configuration inputs
         this.forestHeightInput = document.getElementById('forestHeight');
         this.forestWidthInput = document.getElementById('forestWidth');
         this.fireProbabilityInput = document.getElementById('fireProbability');
-        this.initialPositionsInput = document.getElementById('initialPositions');
+        this.initialPositionsInput = document.getElementById('initialFirePositions');
         
         // Simulation state
         this.config = {
@@ -94,44 +94,40 @@ class ForestFireSimulation {
     
     // Draw the forest grid
     drawForest() {
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        // Use the class's canvas and context references
+        const ctx = this.ctx;
         
-        for (let i = 0; i < this.forest.length; i++) {
-            for (let j = 0; j < this.forest[i].length; j++) {
-                const cellState = this.forest[i][j];
+        // Clear the canvas
+        ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        
+        // Calculate cell size
+        const cellWidth = this.canvas.width / this.config.forestWidth;
+        const cellHeight = this.canvas.height / this.config.forestHeight;
+        
+        // Draw each cell
+        for (let row = 0; row < this.config.forestHeight; row++) {
+            for (let col = 0; col < this.config.forestWidth; col++) {
+                const cellState = this.forest[row][col];
                 
-                // Set fill color based on cell state
-                switch (cellState) {
-                    case CellState.TREE:
-                        this.ctx.fillStyle = '#2ecc71'; // Green
-                        break;
-                    case CellState.FIRE:
-                        this.ctx.fillStyle = '#e74c3c'; // Red
-                        break;
-                    case CellState.ASH:
-                        this.ctx.fillStyle = '#95a5a6'; // Gray
-                        break;
+                // Set color based on cell state
+                if (cellState === CellState.TREE) {
+                    ctx.fillStyle = '#2ecc71'; // Green for trees
+                } else if (cellState === CellState.FIRE) {
+                    ctx.fillStyle = '#e74c3c'; // Red for fire
+                } else if (cellState === CellState.ASH) {
+                    ctx.fillStyle = '#95a5a6'; // Gray for ash
                 }
                 
-                // Draw cell
-                this.ctx.fillRect(
-                    j * this.cellSize, 
-                    i * this.cellSize, 
-                    this.cellSize, 
-                    this.cellSize
-                );
+                // Draw the cell
+                ctx.fillRect(col * cellWidth, row * cellHeight, cellWidth, cellHeight);
                 
                 // Draw cell border
-                this.ctx.strokeStyle = '#34495e';
-                this.ctx.strokeRect(
-                    j * this.cellSize, 
-                    i * this.cellSize, 
-                    this.cellSize, 
-                    this.cellSize
-                );
+                ctx.strokeStyle = '#ddd';
+                ctx.strokeRect(col * cellWidth, row * cellHeight, cellWidth, cellHeight);
             }
         }
     }
+    
     
     // Execute one step of the simulation
     executeStep() {

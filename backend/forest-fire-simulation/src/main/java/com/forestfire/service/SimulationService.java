@@ -30,6 +30,16 @@ public class SimulationService {
     }
     
     /**
+     * Creates a new simulation service with default configuration.
+     * This constructor is provided for API compatibility.
+     */
+    public SimulationService() {
+        // Create default configuration
+        this.config = new SimulationConfig();
+        initialize();
+    }
+    
+    /**
      * Initializes the simulation with the loaded configuration.
      */
     private void initialize() {
@@ -108,6 +118,17 @@ public class SimulationService {
      */
     public void reset() {
         initialize();
+    }
+    
+    /**
+     * Resets the simulation to its initial state.
+     * This method is an alias for reset() to maintain API compatibility.
+     * 
+     * @return The forest object after reset
+     */
+    public Forest resetSimulation() {
+        reset();
+        return forest;
     }
     
     /**
